@@ -24,6 +24,8 @@ Steampipe is great to get information, but does have to make some concessions gi
 
 In this case, the big problem is that the "aws_ssoadmin_account_assignment" table requires you to pass both permission_set_arn and target_account_id. (https://github.com/turbot/steampipe-plugin-aws/issues/1668)
 
+Note -- the permission set seems to be a restriction of the AWS API. I'm not 100% sure about the target account though.
+
 So you can't just say "give me all account assignments".  Which makes it tricky.
 
 So, first problem is solving this. After trying a lot of ways, the best I ended up with was a function that tries _all_ possible combinations.  This ends up in a ton of API calls, since it's permission sets * accounts.
